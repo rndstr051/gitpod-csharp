@@ -1,4 +1,4 @@
-FROM gitpod/workspace-full-vnc
+FROM gitpod/workspace-full
                     
 USER gitpod
 
@@ -9,5 +9,10 @@ USER gitpod
 #
 # More information: https://www.gitpod.io/docs/config-docker/
 
-
-RUN sudo apt-get -q update && sudo apt-get install -yq mono-complete && sudo rm -rf /var/lib/apt/lists/*
+RUN wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O /tmp/packages-microsoft-prod.deb \
+    && sudo dpkg -i /tmp/packages-microsoft-prod.deb \
+    && sudo apt-get -q update \
+    && sudo apt-get install -yq \
+        dotnet-sdk-3.1 \
+        mono-complete \
+    && sudo rm -rf /var/lib/apt/lists/*
